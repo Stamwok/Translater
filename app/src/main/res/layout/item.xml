@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/tvlSource"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="3"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvlTranslated"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="3"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvlDate"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:text="TextView"
+            android:textSize="8dp" />
+
+        <ProgressBar
+
+            android:id="@+id/spinner"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical|left"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
