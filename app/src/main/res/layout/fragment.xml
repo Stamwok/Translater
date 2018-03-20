@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -7,5 +7,5 @@
     <ListView
         android:id="@+id/lvFrag"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="458dp" />
+</LinearLayout>

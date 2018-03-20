@@ -55,6 +55,7 @@ public class MainActivity extends FragmentActivity implements CompoundButton.OnC
         setContentView(R.layout.activity_main);
 
         etSource=(EditText)findViewById(R.id.etSource);
+
         tvTranslate=(TextView)findViewById(R.id.tvTranslate);
         switch1=(Switch)findViewById(R.id.switch1);
         tvLang1=(TextView)findViewById(R.id.tvLang1);
@@ -106,17 +107,41 @@ public class MainActivity extends FragmentActivity implements CompoundButton.OnC
        }
 
     public void onclick (View v) {
-        if(!etSource.getText().toString().equals("")&& hasConnect(this)) {
+           etSource.selectAll();
+           boolean needTranslate=true;
+           if(!etSource.getText().toString().equals("")) {
+               Cursor cursorCheck = bd.getAllData();
+               if (cursorCheck.moveToFirst()) {
+                   do {
+                       long id = cursorCheck.getInt(cursorCheck.getColumnIndex("_id"));
+                       String source = cursorCheck.getString(cursorCheck.getColumnIndex("source"));
+                       String translated = cursorCheck.getString(cursorCheck.getColumnIndex("translated"));
+                       String lang = cursorCheck.getString(cursorCheck.getColumnIndex("lang"));
+                       if (etSource.getText().toString().equals(source)&&!source.equals(translated)) {
+                           bd.addRec(source, translated, sdf.format(new Date()), lang);
+                           bd.delRec(id);
+                           tvTranslate.setText(translated);
+                           needTranslate=false;
+
+                       }
+
+                   } while (cursorCheck.moveToNext());
+               }
+               getSupportLoaderManager().getLoader(0).forceLoad();
+           }
+        if(!etSource.getText().toString().equals("")&& hasConnect(this)&&needTranslate) {
             translate(etSource.getText().toString(), languagePair);
+            needTranslate=false;
 
         }
-        else if(!etSource.getText().toString().equals("")){
+        if(!etSource.getText().toString().equals("")&&needTranslate){
 
             dateNow = new Date();
             bd.addRec(etSource.getText().toString(), "", sdf.format(dateNow), languagePair);
             getSupportLoaderManager().getLoader(0).forceLoad();
 
         }
+
     }
 
     void translate(String text, String languages){
@@ -126,10 +151,10 @@ public class MainActivity extends FragmentActivity implements CompoundButton.OnC
         }
     public void processFinish(String output){
 
-            tvTranslate.setText(output);
-            dateNow = new Date();
-            bd.addRec(etSource.getText().toString(), output, sdf.format(dateNow), languagePair);
-            getSupportLoaderManager().getLoader(0).forceLoad();
+                tvTranslate.setText(output);
+                dateNow = new Date();
+                bd.addRec(etSource.getText().toString(), output, sdf.format(dateNow), languagePair);
+                getSupportLoaderManager().getLoader(0).forceLoad();
 
 
     }
@@ -240,7 +265,7 @@ public class MainActivity extends FragmentActivity implements CompoundButton.OnC
         public boolean setViewValue(View v, Cursor c, int column) {
             if (v.getId() == R.id.spinner) {
                 if (!c.getString(column).equals("")) {
-                    v.setVisibility(View.GONE);
+                    v.setVisibility(View.INVISIBLE);
                 }
                 else v.setVisibility(View.VISIBLE);
                 return true;

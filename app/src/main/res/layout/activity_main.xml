@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lungful.translator.MainActivity">
+    tools:context="com.example.lungful.translator.MainActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    >
 
     <TextView
         android:id="@+id/tvLang1"
@@ -27,7 +30,8 @@
         android:inputType="textPersonName"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжхийклмнопрстуфхцчшщьъыэюяАБВГДЕЁЖХИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" />
 
     <TextView
         android:id="@+id/tvTranslate"
@@ -56,10 +60,9 @@
         android:id="@+id/fragment"
         android:name="com.example.lungful.translator.Frag"
         android:layout_width="382dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="486dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSource"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:layout="@layout/fragment" />
 
     <TextView
@@ -85,5 +88,37 @@
         app:layout_constraintEnd_toEndOf="@+id/btnOk"
         app:layout_constraintStart_toStartOf="@+id/btnOk"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvTranslate"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Слово"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Перевод"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Дата"
+            android:layout_marginLeft="8dp"/>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
